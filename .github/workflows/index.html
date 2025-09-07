@@ -1,0 +1,710 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>HBD MY LOVELY SISTER URROJ</title>	    
+    <link type="text/css" rel="stylesheet" href="./file/default.css">
+    <script type="text/javascript" src="./file/jquery.min.js"></script>
+    <script type="text/javascript" src="./file/jscex.min.js"></script>
+    <script type="text/javascript" src="./file/jscex-parser.js"></script>
+    <script type="text/javascript" src="./file/jscex-jit.js"></script>
+    <script type="text/javascript" src="./file/jscex-builderbase.min.js"></script>
+    <script type="text/javascript" src="./file/jscex-async.min.js"></script>
+    <script type="text/javascript" src="./file/jscex-async-powerpack.min.js"></script>
+    <script type="text/javascript" src="./file/functions.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./file/love.js" charset="utf-8"></script>
+    <script>
+        function playAudio() {
+            var audio = document.getElementById("myAudio");
+            audio.play();
+        }
+    </script>
+</head>
+<body>
+    <div id="main">
+        <div id="error"><a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a> (<a href="http://firefox.com.cn/download/">Firefox</a>)</div>
+        <audio autoplay="autoplay" height="100" width="100" id="myAudio">
+            <source src="aud.mp3" type="audio/mp3" />
+            <embed height="100" width="100" src="aud.mp3" />
+        </audio>
+        <div id="wrap">
+            <div id="text">
+                <div id="code">
+                    <span class="say">Today is September 18 ❤️</span><br>
+                    <span class="say">A small Surprise from me and Hushna💞</span><br>
+                    <span class="say">My beautiful Sister Urooj 💞</span><br>
+                    <span class="say">Happy Birthday My Cute Sister 🎈</span><br>
+                    <span class="say">May Allah bless you 🍀</span><br>
+                    <span class="say">And give u many happiness 💕</span><br>
+                    <span class="say">I loved you Behen ❤️</span><br>
+                    <span class="say">And I will always love u so much  🥺 ❤️</span><br>
+                    <span class="say">Hope u have a great day today ❤️</span><br>
+                    <span class="say">I am so lucky to have such a lovely and thoughtful sister like you! Sending you lots of love today! ❤️</span><br>
+                </div>
+            </div>
+            <div id="clock-box">
+                <span id="clock">577 days 0 hours 0 minutes 0 seconds</span> <!-- Change to "6940 days..." if needed -->
+            </div>
+            <canvas id="canvas" width="1100" height="680"></canvas>
+        </div>
+    </div>
+
+<!-- Panda Container -->
+<div id="panda-container" style="position: fixed; left: 0; bottom: 10px; z-index: 1001; width: 120px; height: 160px; pointer-events: none;">
+    <!-- Panda SVG (full body) -->
+    <svg id="panda-svg" width="120" height="160" viewBox="0 0 120 160">
+        <!-- Ears -->
+        <ellipse cx="35" cy="35" rx="18" ry="18" fill="#222"/>
+        <ellipse cx="85" cy="35" rx="18" ry="18" fill="#222"/>
+        <!-- Head -->
+        <ellipse cx="60" cy="60" rx="40" ry="35" fill="#fff" stroke="#222" stroke-width="3"/>
+        <!-- Eyes -->
+        <ellipse cx="45" cy="65" rx="10" ry="13" fill="#222"/>
+        <ellipse cx="75" cy="65" rx="10" ry="13" fill="#222"/>
+        <circle cx="45" cy="70" r="4" fill="#fff"/>
+        <circle cx="75" cy="70" r="4" fill="#fff"/>
+        <!-- Nose -->
+        <ellipse cx="60" cy="80" rx="6" ry="4" fill="#222"/>
+        <!-- Mouth -->
+        <path d="M55 90 Q60 95 65 90" stroke="#222" stroke-width="2" fill="none"/>
+        <!-- Body -->
+        <ellipse cx="60" cy="120" rx="32" ry="35" fill="#fff" stroke="#222" stroke-width="3"/>
+        <!-- Arms -->
+        <ellipse cx="30" cy="110" rx="10" ry="25" fill="#222" transform="rotate(-20 30 110)"/>
+        <ellipse cx="90" cy="110" rx="10" ry="25" fill="#222" transform="rotate(20 90 110)"/>
+        <!-- Legs -->
+        <ellipse cx="45" cy="150" rx="10" ry="15" fill="#222"/>
+        <ellipse cx="75" cy="150" rx="10" ry="15" fill="#222"/>
+    </svg>
+    <!-- Speech Bubble (hidden by default) -->
+    <div id="panda-bubble" style="display:none; position:absolute; left:110px; bottom:60px; background:#fff; border-radius:15px; border:2px solid #222; padding:12px 18px; font-size:18px; color:#222; box-shadow:2px 2px 8px #aaa;">
+        🎉 Happy Birthday My cute Sister Urooj! 🎈<br>Wishing you lots of love and happiness!
+    </div>
+</div>
+
+<!-- ...existing code... -->
+<style>
+    #pic-thumb {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 3000;
+        width: 70px;
+        height: 70px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px #aaa;
+        cursor: pointer;
+        object-fit: cover;
+        border: 2px solid #e91e63;
+        transition: transform 0.2s;
+    }
+    #pic-thumb:hover {
+        transform: scale(1.08);
+    }
+    #pic-popup-bg {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 3100;
+        animation: fadeInBg 0.5s;
+    }
+    @keyframes fadeInBg {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    #pic-popup {
+        position: fixed;
+        top: 60px;
+        left: 60px;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        padding: 18px;
+        z-index: 3200;
+        display: none;
+        animation: fadeInPic 0.5s;
+        max-width: 90vw;
+        max-height: 80vh;
+    }
+    @keyframes fadeInPic {
+        from { transform: scale(0.7); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+    #pic-popup img {
+        max-width: 400px;
+        max-height: 350px;
+        border-radius: 12px;
+        display: block;
+        margin: 0 auto;
+    }
+    #pic-popup-close {
+        position: absolute;
+        top: 8px;
+        right: 18px;
+        font-size: 22px;
+        color: #e91e63;
+        cursor: pointer;
+        font-weight: bold;
+        background: none;
+        border: none;
+    }
+</style>
+
+<img id="pic-thumb" src=""C:\Users\Siddiqui Aklakh\Downloads\urooj behen\WhatsApp Image 2025-08-19 at 21.39.54_5e5fdbed.jpg"" alt="Tap to view" title="Tap to view">
+
+<div id="pic-popup-bg"></div>
+<div id="pic-popup">
+    <button id="pic-popup-close" aria-label="Close">&times;</button>
+    <img src="WhatsApp Image 2025-08-19 at 21.39.54_5e5fdbed.jpg" alt="Picture">
+</div>
+
+<script>
+    // Show popup on thumbnail click
+    document.getElementById('pic-thumb').onclick = function() {
+        document.getElementById('pic-popup-bg').style.display = 'block';
+        var popup = document.getElementById('pic-popup');
+        popup.style.display = 'block';
+        popup.style.animation = 'fadeInPic 0.5s';
+    };
+    // Hide popup on close button or background click
+    document.getElementById('pic-popup-close').onclick = function() {
+        document.getElementById('pic-popup-bg').style.display = 'none';
+        document.getElementById('pic-popup').style.display = 'none';
+    };
+    document.getElementById('pic-popup-bg').onclick = function() {
+        document.getElementById('pic-popup-bg').style.display = 'none';
+        document.getElementById('pic-popup').style.display = 'none';
+    };
+</script>
+<!-- ...existing code... -->
+
+
+<div id="pic-popup-bg"></div>
+<div id="pic-popup">
+    <button id="pic-popup-close" aria-label="Close">&times;</button>
+    <img src="file:///C:/Users/Siddiqui%20Aklakh/Desktop/WhatsApp%20Image%202025-08-19%20at%2021.39.54_5e5fdbed.jpg" alt="Picture">
+</div>
+<!-- ...existing code... -->
+
+<div id="pic-popup-bg"></div>
+<div id="pic-popup">
+    <button id="pic-popup-close" aria-label="Close">&times;</button>
+    <img src="WhatsApp Image 2025-08-19 at 21.39.54_5e5fdbed.jpg" alt="Picture">
+</div>
+
+<script>
+    // Show popup on thumbnail click
+    document.getElementById('pic-thumb').onclick = function() {
+        document.getElementById('pic-popup-bg').style.display = 'block';
+        var popup = document.getElementById('pic-popup');
+        popup.style.display = 'block';
+        popup.style.animation = 'fadeInPic 0.5s';
+    };
+    // Hide popup on close button or background click
+    document.getElementById('pic-popup-close').onclick = function() {
+        document.getElementById('pic-popup-bg').style.display = 'none';
+        document.getElementById('pic-popup').style.display = 'none';
+    };
+    document.getElementById('pic-popup-bg').onclick = function() {
+        document.getElementById('pic-popup-bg').style.display = 'none';
+        document.getElementById('pic-popup').style.display = 'none';
+    };
+</script>
+
+<script>
+// Panda walking animation
+(function() {
+    var panda = document.getElementById('panda-container');
+    var bubble = document.getElementById('panda-bubble');
+    var maxRight = window.innerWidth - 140; // 120px panda + 20px margin
+    var pos = 0;
+    var direction = 1; // 1 = right, -1 = left
+
+    function walk() {
+        pos += direction * 2;
+        panda.style.left = pos + 'px';
+
+        // Panda "waving" arm animation (optional)
+        var svg = document.getElementById('panda-svg');
+        var arm = svg.querySelectorAll('ellipse')[5];
+        arm.setAttribute('transform', 'rotate(' + (direction === 1 ? '-20' : '-40') + ' 30 110)');
+
+        if (pos >= maxRight) {
+            direction = -1;
+            bubble.style.display = 'block'; // Show wish
+        } else if (pos <= 0) {
+            direction = 1;
+            bubble.style.display = 'none'; // Hide wish
+        }
+        requestAnimationFrame(walk);
+    }
+    walk();
+})();
+</script>
+
+<!-- ...existing code... -->
+
+<!-- Firecracker Canvas Overlay -->
+<canvas id="firecracker-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;"></canvas>
+
+<script>
+// --- Firecracker Animation ---
+// Improved: Starts on click, more particles, more colors, random positions
+
+const canvas = document.getElementById('firecracker-canvas');
+const ctx = canvas.getContext('2d');
+let W = window.innerWidth;
+let H = window.innerHeight;
+canvas.width = W;
+canvas.height = H;
+
+window.addEventListener('resize', () => {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
+});
+
+function randomColor() {
+    const colors = [
+        '#ff1744','#ff9100','#ffd600','#00e676','#2979ff','#d500f9','#fff',
+        '#ffeb3b','#00bcd4','#8bc34a','#e040fb','#ff5722','#cddc39','#f44336'
+    ];
+    return colors[Math.floor(Math.random()*colors.length)];
+}
+
+class Particle {
+    constructor(x, y, angle, speed, color) {
+        this.x = x;
+        this.y = y;
+        this.angle = angle;
+        this.speed = speed;
+        this.color = color;
+        this.radius = 2 + Math.random()*3;
+        this.life = 60 + Math.random()*30;
+        this.alpha = 1;
+    }
+    update() {
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed + 0.7; // gravity
+        this.speed *= 0.96;
+        this.life--;
+        this.alpha = Math.max(0, this.life/90);
+    }
+    draw(ctx) {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 12;
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+class Firework {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.particles = [];
+        let color = randomColor();
+        let count = 60 + Math.floor(Math.random()*30);
+        for(let i=0;i<count;i++) {
+            let angle = (Math.PI*2)*i/count;
+            let speed = 3 + Math.random()*3;
+            this.particles.push(new Particle(this.x, this.y, angle, speed, color));
+        }
+    }
+    update() {
+        this.particles.forEach(p=>p.update());
+    }
+    draw(ctx) {
+        this.particles.forEach(p=>p.draw(ctx));
+    }
+    isAlive() {
+        return this.particles.some(p=>p.life>0);
+    }
+}
+
+let fireworks = [];
+let running = false;
+
+function animateFirecrackers() {
+    ctx.clearRect(0,0,W,H);
+    fireworks.forEach(fw=>fw.update());
+    fireworks.forEach(fw=>fw.draw(ctx));
+    fireworks = fireworks.filter(fw=>fw.isAlive());
+    if (fireworks.length > 0) {
+        requestAnimationFrame(animateFirecrackers);
+    } else {
+        running = false;
+    }
+}
+
+// Start firecrackers on click anywhere on body
+document.body.addEventListener('click', function(e) {
+    // Launch multiple fireworks at random positions for more effect
+    for(let i=0;i<5;i++) {
+        let fx = Math.random()*W*0.8 + W*0.1;
+        let fy = Math.random()*H*0.6 + H*0.2;
+        fireworks.push(new Firework(fx, fy));
+    }
+    // Also launch one at click position
+    fireworks.push(new Firework(e.clientX, e.clientY));
+    if (!running) {
+        running = true;
+        animateFirecrackers();
+    }
+});
+</script>
+
+<!-- ...existing code... -->
+
+
+
+<!-- ...existing code... -->
+
+<!-- Firecracker Canvas Overlay -->
+<canvas id="firecracker-canvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;"></canvas>
+
+<!-- Countdown Timer Top Center -->
+<div id="birthday-countdown" style="position:fixed;top:10px;left:50%;transform:translateX(-50%);background:#fffbe8;border-radius:16px;padding:10px 28px;font-size:22px;color:#e91e63;box-shadow:0 2px 8px #aaa;z-index:9999;">
+    Birthday Countdown: <span id="countdown-value"></span>
+</div>
+
+<script>
+// --- Firecracker Animation ---
+const canvas = document.getElementById('firecracker-canvas');
+const ctx = canvas.getContext('2d');
+let W = window.innerWidth;
+let H = window.innerHeight;
+canvas.width = W;
+canvas.height = H;
+
+window.addEventListener('resize', () => {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
+});
+
+function randomColor() {
+    const colors = ['#ff1744','#ff9100','#ffd600','#00e676','#2979ff','#d500f9','#fff'];
+    return colors[Math.floor(Math.random()*colors.length)];
+}
+
+class Particle {
+    constructor(x, y, angle, speed, color) {
+        this.x = x;
+        this.y = y;
+        this.angle = angle;
+        this.speed = speed;
+        this.color = color;
+        this.radius = 2 + Math.random()*2;
+        this.life = 60 + Math.random()*20;
+        this.alpha = 1;
+    }
+    update() {
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed + 0.5; // gravity
+        this.speed *= 0.97;
+        this.life--;
+        this.alpha = Math.max(0, this.life/80);
+    }
+    draw(ctx) {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+class Firework {
+    constructor() {
+        this.x = Math.random()*W*0.8 + W*0.1;
+        this.y = H*0.8 + Math.random()*H*0.1;
+        this.particles = [];
+        let color = randomColor();
+        for(let i=0;i<40;i++) {
+            let angle = (Math.PI*2)*i/40;
+            let speed = 3 + Math.random()*2;
+            this.particles.push(new Particle(this.x, this.y, angle, speed, color));
+        }
+    }
+    update() {
+        this.particles.forEach(p=>p.update());
+    }
+    draw(ctx) {
+        this.particles.forEach(p=>p.draw(ctx));
+    }
+    isAlive() {
+        return this.particles.some(p=>p.life>0);
+    }
+}
+
+let fireworks = [];
+function animateFirecrackers() {
+    ctx.clearRect(0,0,W,H);
+    if(Math.random()<0.04) fireworks.push(new Firework());
+    fireworks.forEach(fw=>fw.update());
+    fireworks.forEach(fw=>fw.draw(ctx));
+    fireworks = fireworks.filter(fw=>fw.isAlive());
+    requestAnimationFrame(animateFirecrackers);
+}
+animateFirecrackers();
+</script>
+
+<script>
+// --- Birthday Countdown ---
+function updateCountdown() {
+    const target = new Date(new Date().getFullYear(), 8, 18, 0, 0, 0); // September is month 8 (0-indexed)
+    const now = new Date();
+    let diff = target - now;
+    if (diff < 0) {
+        // If passed, set for next year
+        target.setFullYear(target.getFullYear() + 1);
+        diff = target - now;
+    }
+    const days = Math.floor(diff/(1000*60*60*24));
+    const hours = Math.floor((diff/(1000*60*60))%24);
+    const mins = Math.floor((diff/(1000*60))%60);
+    const secs = Math.floor((diff/1000)%60);
+    document.getElementById('countdown-value').textContent =
+        `${days} days ${hours} hours ${mins} minutes ${secs} seconds`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+
+<!-- ...existing code... -->
+
+
+
+<!-- Gift Icon and Popup -->
+<style>
+    #gift-container {
+        position: fixed;
+        right: 30px;
+        bottom: 30px;
+        z-index: 2000;
+        cursor: pointer;
+        width: 70px;
+        height: 70px;
+        transition: transform 0.2s;
+    }
+    #gift-container:hover {
+        transform: scale(1.1) rotate(-10deg);
+    }
+    #gift-popup {
+        display: none;
+        position: fixed;
+        right: 110px;
+        bottom: 80px;
+        background: #fff;
+        border-radius: 20px;
+        border: 3px solid #e91e63;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        padding: 30px 40px;
+        font-size: 22px;
+        color: #222;
+        z-index: 2100;
+        animation: popup-bounce 0.7s;
+        max-width: 350px;
+        text-align: center;
+    }
+    @keyframes popup-bounce {
+        0% { transform: scale(0.2); opacity: 0; }
+        60% { transform: scale(1.1); opacity: 1; }
+        80% { transform: scale(0.95); }
+        100% { transform: scale(1); }
+    }
+    #gift-close {
+        position: absolute;
+        top: 10px;
+        right: 18px;
+        font-size: 22px;
+        color: #e91e63;
+        cursor: pointer;
+        font-weight: bold;
+        background: none;
+        border: none;
+    }
+</style>
+
+<div id="gift-container" title="Open your birthday gift!">
+    <!-- Simple Gift SVG Icon -->
+    <svg width="70" height="70" viewBox="0 0 70 70">
+        <rect x="12" y="28" width="46" height="30" rx="7" fill="#e91e63" stroke="#b71c1c" stroke-width="2"/>
+        <rect x="12" y="28" width="46" height="10" rx="5" fill="#fff" opacity="0.5"/>
+        <rect x="32" y="28" width="6" height="30" fill="#fff"/>
+        <rect x="12" y="28" width="46" height="6" fill="#fff"/>
+        <ellipse cx="23" cy="28" rx="8" ry="8" fill="#f8bbd0" stroke="#e91e63" stroke-width="2"/>
+        <ellipse cx="47" cy="28" rx="8" ry="8" fill="#f8bbd0" stroke="#e91e63" stroke-width="2"/>
+        <path d="M23 28 Q23 18 35 18 Q47 18 47 28" stroke="#e91e63" stroke-width="2" fill="none"/>
+    </svg>
+</div>
+
+<div id="gift-popup">
+    <button id="gift-close" aria-label="Close">&times;</button>
+    <div>
+        My dear cute sister Urooj,<br>
+        I can't able to meet you..<br><br>
+        <b>HAPPY BIRTHDAY MY CUTE SISTER UROOJ</b><br><br>
+        <span style="font-size:28px;">🎁💖🎈</span>
+    </div>
+</div>
+
+<script>
+    // Gift popup logic
+    document.getElementById('gift-container').onclick = function() {
+        var popup = document.getElementById('gift-popup');
+        popup.style.display = 'block';
+        popup.style.animation = 'popup-bounce 0.7s';
+    };
+    document.getElementById('gift-close').onclick = function() {
+        var popup = document.getElementById('gift-popup');
+        popup.style.display = 'none';
+    };
+</script>
+
+    <script>
+    (function() {
+        var canvas = $('#canvas');
+		
+        if (!canvas[0].getContext) {
+            $("#error").show();
+            return false;
+        }
+
+        var width = canvas.width();
+        var height = canvas.height();        
+        canvas.attr("width", width);
+        canvas.attr("height", height);
+
+        var opts = {
+            seed: {
+                x: width / 2 - 20,
+                color: "rgb(190, 26, 37)",
+                scale: 2
+            },
+            branch: [
+                [535, 680, 570, 250, 500, 200, 30, 100, [
+                    [540, 500, 455, 417, 340, 400, 13, 100, [
+                        [450, 435, 434, 430, 394, 395, 2, 40]
+                    ]],
+                    [550, 445, 600, 356, 680, 345, 12, 100, [
+                        [578, 400, 648, 409, 661, 426, 3, 80]
+                    ]],
+                    [539, 281, 537, 248, 534, 217, 3, 40],
+                    [546, 397, 413, 247, 328, 244, 9, 80, [
+                        [427, 286, 383, 253, 371, 205, 2, 40],
+                        [498, 345, 435, 315, 395, 330, 4, 60]
+                    ]],
+                    [546, 357, 608, 252, 678, 221, 6, 100, [
+                        [590, 293, 646, 277, 648, 271, 2, 80]
+                    ]]
+                ]] 
+            ],
+            bloom: {
+                num: 700,
+                width: 1080,
+                height: 650,
+            },
+            footer: {
+                width: 1200,
+                height: 5,
+                speed: 10,
+            }
+        }
+
+        var tree = new Tree(canvas[0], width, height, opts);
+        var seed = tree.seed;
+        var foot = tree.footer;
+        var hold = 1;
+
+        canvas.click(function(e) {
+            playAudio();
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            if (seed.hover(x, y)) {
+                hold = 0; 
+                canvas.unbind("click");
+                canvas.unbind("mousemove");
+                canvas.removeClass('hand');
+            }
+        }).mousemove(function(e) {
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            canvas.toggleClass('hand', seed.hover(x, y));
+        });
+
+        var seedAnimate = eval(Jscex.compile("async", function () {
+            seed.draw();
+            while (hold) {
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canScale()) {
+                seed.scale(0.95);
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canMove()) {
+                seed.move(0, 2);
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+        }));
+
+        var growAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.grow();
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canGrow());
+        }));
+
+        var flowAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.flower(2);
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canFlower());
+        }));
+
+        var moveAnimate = eval(Jscex.compile("async", function () {
+            tree.snapshot("p1", 240, 0, 610, 680);
+            while (tree.move("p1", 500, 0)) {
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+            foot.draw();
+            tree.snapshot("p2", 500, 0, 610, 680);
+
+            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+            canvas.css("background", "#ffe");
+            $await(Jscex.Async.sleep(300));
+            canvas.css("background", "none");
+        }));
+
+        var textAnimate = eval(Jscex.compile("async", function () {
+            $("#code").show().typewriter();
+        }));
+	    
+        var runAsync = eval(Jscex.compile("async", function () {
+            $await(seedAnimate());
+            $await(growAnimate());
+            $await(flowAnimate());
+            $await(moveAnimate());
+            textAnimate().start();
+        }));
+
+        runAsync().start();
+    })();
+    </script>
+</body>
+</html>
